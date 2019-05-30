@@ -1,0 +1,21 @@
+{
+  "name": "puhelinluettelon_backend",
+  "version": "1.0.0",
+  "description": "fullstackopen-kurssin osa3 puhelinluettelon backend",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "nodemon index.js"
+  },
+  "author": "Jerry Hällfors",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "heroku": "^7.24.4"
+  }
+}

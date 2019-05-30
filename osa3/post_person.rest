@@ -1,0 +1,10 @@
+POST http://localhost:3001/persons
+Content-Type: application/json
+
+{
+    "content": {
+        "name": "Jussi Virtanen",
+        "number": "040-12358961"
+    },
+    "important": true
+}
