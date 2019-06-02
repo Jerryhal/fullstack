@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const cors = require('cors')
-
+app.use(express.static('build'))
 app.use(cors())
 app.use(bodyParser.json())
 
@@ -31,18 +31,18 @@ let persons = [
 
 
 
-app.get('/persons/', (request, response) => {
+app.get('/api/persons/', (request, response) => {
     response.json(persons)
 })
 
-app.get('/info/', (request, response) => {
+app.get('/api/info/', (request, response) => {
     let responseString = `<div>Puhelinluettelossa on ${persons.length} henkilön tiedot</div>`
     responseString += `<div>${String(new Date())}</div>`
     response.send(responseString)
 })
 
 
-app.get('/persons/:id', (request, response) => {
+app.get('/api/persons/:id', (request, response) => {
     const id = Number(request.params.id)
     const person = persons.find(person => person.id === id)
 
@@ -53,15 +53,15 @@ app.get('/persons/:id', (request, response) => {
     }
 })
 
-app.delete('/persons/:id', (request, response) => {
+app.delete('/api/persons/:id', (request, response) => {
     const id = Number(request.params.id);
     persons = persons.filter(person => person.id !== id);
     response.status(204).end();
 });
 
 
-app.post('/persons', (request, response) => {
-    const content = request.body.content
+app.post('/api/persons', (request, response) => {
+    const content = request.body
     if (!content) {
         return response.status(400).json({
             error: 'content missing'
