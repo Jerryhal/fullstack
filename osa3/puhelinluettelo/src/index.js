@@ -14,7 +14,7 @@ const App = () => {
     const [persons, setPersons] = useState([])
     const [newName, setNewName] = useState('')
     const [newNumber, setNewNumber] = useState('')
-    const [successMessage, setSuccessMessage] = useState('')
+    const [message, setMessage] = useState({})
     const [filteredContacts, setFilteredContacts] = useState(persons)
 
     const changeContactsState = (state) => {
@@ -32,14 +32,20 @@ const App = () => {
             create(newPerson).then(newPerson => {
                 changeContactsState(persons.concat(newPerson))
                 setTimeout(() => {
-                    setSuccessMessage(null)
+                    setMessage(null)
                 }, 5000)
-                setSuccessMessage('Listättiin ' + newPerson.name)
+                setMessage({ success: 'Listättiin ' + newPerson.name })
             })
+            .catch(error => {
+                setTimeout(() => {
+                    setMessage(null)
+                }, 5000)
+                setMessage({error: error.response.data.error.errors.name.message})
+            });
         } else if (personExists && newPerson.number && newPerson.number.length > 0) {
-            put(newPerson, personExists.id).then(asd =>
+            put(newPerson, personExists.id).then(() =>
                 changeContactsState(persons.map(person => person.id !== personExists.id ? person : newPerson))
-                )
+            )
         } else {
             alert(`${newName} on jo luettelossa`)
         }
@@ -62,7 +68,7 @@ const App = () => {
         <Phonebook filterContacts={filterContacts} addContact={addContact}
             nameHandler={nameHandler} numberHandler={numberHandler}
             filteredContacts={filteredContacts}
-            successMessage={successMessage} removeContact={removeContact} />
+            message={message} removeContact={removeContact} />
     )
 }
 

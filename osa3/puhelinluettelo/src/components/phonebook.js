@@ -1,16 +1,16 @@
 import React from 'react'
 
 import Rows from './rows'
-import SuccessMessage from './messages'
+import Message from './messages'
 import Filter from './filter'
 import Form from './form'
 
 const Phonebook = ({ filterContacts, addContact, 
     nameHandler, numberHandler, removeContact,
-    filteredContacts, successMessage }) => {
+    filteredContacts, message }) => {
     return (
         <div>
-            <SuccessMessage successMessage={successMessage} />
+            <Message message={message} />
             <h2>Puhelinluettelo</h2>
             <Filter filterContacts={filterContacts} />
             <Form addContact={addContact} nameHandler={nameHandler} numberHandler={numberHandler} />

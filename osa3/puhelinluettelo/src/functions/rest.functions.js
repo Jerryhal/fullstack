@@ -13,7 +13,9 @@ const remove = (person) =>
 
 const put = (person, id) => {
     const newPerson = { ...person, id: id}
-    return axios.put(baseUrl + '/' +  newPerson.id, newPerson).then(response => response.data);
+    return axios.put(baseUrl + '/' +  newPerson.id, newPerson)
+    .then(response => response.data)
+    .catch(error => error);
 }
 
 export { getAll, create, remove, put } 
