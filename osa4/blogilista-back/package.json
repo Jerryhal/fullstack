@@ -3,15 +3,18 @@
   "version": "1.0.0",
   "description": "fullstackopen-kurssin osa4 blogi",
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "nodemon index.js",
+    "start": "cross-env NODE_ENV=production node index.js",
+    "watch": "cross-env NODE_ENV=development nodemon index.js",
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
     "lint": "eslint ."
   },
   "author": "Jerry Hällfors",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^1.19.1"
+    "cross-env": "^5.2.0",
+    "jest": "^24.8.0",
+    "nodemon": "^1.19.1",
+    "supertest": "^4.0.2"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -20,5 +23,8 @@
     "heroku": "^7.24.4",
     "mongoose": "^5.5.12",
     "mongoose-unique-validator": "^2.0.3"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
