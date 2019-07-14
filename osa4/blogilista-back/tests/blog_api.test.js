@@ -99,6 +99,41 @@ describe('when there is initially some blogs saved', () => {
     })
   })
 })
+describe('deletion of a blog', () => {
+  test('succeeds with status code 204 if id is valid', async () => {
+    const blogsAtStart = await helper.blogsInDb()
+    const blogToDelete = blogsAtStart[0]
+
+    await api
+      .delete(`/api/blogs/${blogToDelete.id}`)
+      .expect(204)
+
+    const blogsAtEnd = await helper.blogsInDb()
+
+    expect(blogsAtEnd.length).toBe(
+      helper.initialBlogs.length - 1
+    )
+
+    const authors = blogsAtEnd.map(r => r.author)
+    expect(authors).not.toContain(blogToDelete.author)
+  })
+})
+
+describe('editing of a blog', () => {
+  test('succeeds with valid data', async() => {
+    const blogsAtStart = await helper.blogsInDb()
+    const blogToEdit = blogsAtStart[0]
+    const newLikes = {likes: 10}
+    await api
+      .put(`/api/blogs/${blogToEdit.id}`)
+      .send(newLikes)
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+
+    const blogsAtEnd = await helper.blogsInDb()
+    expect(blogsAtEnd[0].likes).toEqual(newLikes.likes)
+  })
+})
 
 afterAll(() => {
   mongoose.connection.close()
