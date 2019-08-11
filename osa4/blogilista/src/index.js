@@ -1,7 +1,7 @@
 import './index.css';
 import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
-import { getAll, create, remove, put } from './functions/rest.functions'
+import { getAll } from './functions/rest.functions'
 
 const App = () => {
     const [blogs, setBlogs] = useState([])
