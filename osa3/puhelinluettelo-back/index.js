@@ -18,9 +18,11 @@ app.get('/api/persons/', (request, response) => {
 })
 
 app.get('/api/info/', (request, response) => {
-    let responseString = `<div>Puhelinluettelossa on ${persons.length} henkilön tiedot</div>`
-    responseString += `<div>${String(new Date())}</div>`
-    response.send(responseString)
+    Contact.find({}).then(contacts => {
+        let responseString = `<div>Puhelinluettelossa on ${contacts.length} henkilön tiedot</div>`
+        responseString += `<div>${String(new Date())}</div>`
+        response.send(responseString)
+    })
 })
 
 
