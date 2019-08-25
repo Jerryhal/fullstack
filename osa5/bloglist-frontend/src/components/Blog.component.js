@@ -16,7 +16,7 @@ const Blog = ({ newMessage }) => {
     setBlogs(blogs.concat(newBlog))
   }
   return (
-    (blogs.length && blogs.length > 0) ?
+    (blogs && blogs.length && blogs.length > 0) ?
       <>
         <h2>blogs</h2>
         <Togglable buttonLabel='new note'>
