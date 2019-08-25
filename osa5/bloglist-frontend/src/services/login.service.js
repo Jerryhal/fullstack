@@ -3,10 +3,10 @@ const baseUrl = '/api/login'
 
 const login = async(username, password) => {
   try {
-    return await axios.post(baseUrl, {username, password})
+    return await axios.post(baseUrl, { username, password })
   } catch (e) {
-    console.log(e);
+    console.log(e)
   }
 }
 
-export {login}
+export { login }

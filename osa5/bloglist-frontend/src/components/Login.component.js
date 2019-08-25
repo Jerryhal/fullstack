@@ -1,5 +1,5 @@
-import { login } from "../services/login.service";
-import React, { useState } from 'react';
+import { login } from '../services/login.service'
+import React, { useState } from 'react'
 
 const Login = ({ setUser, newMessage }) => {
     const [username, setUsername] = useState('')
@@ -10,9 +10,9 @@ const Login = ({ setUser, newMessage }) => {
         if (token) {
             window.localStorage.setItem('loggedAppUser', JSON.stringify(token))
             setUser(JSON.stringify(token))
-            newMessage({success: 'logged in'})
+            newMessage({ success: 'logged in' })
         } else {
-            newMessage({error: 'failed to log in'})
+            newMessage({ error: 'failed to log in' })
         }
     }
 

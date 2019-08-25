@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { postBlog } from '../services/blogs.service';
+import React, { useState } from 'react'
+import { postBlog } from '../services/blogs.service'
 
 const BlogForm = ({ refreshBlogs, newMessage }) => {
     const [title, setTitle] = useState('')

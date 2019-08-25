@@ -29,4 +29,4 @@ const Message = ({ message }) => {
     }
     return ''
 }
-export default Message;
+export default Message

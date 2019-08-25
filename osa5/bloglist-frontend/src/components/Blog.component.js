@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import { getAll, likeBlog, deleteBlog } from '../services/blogs.service'
 import BlogForm from './blog-form.component'
-import Togglable from './togglable.component';
+import Togglable from './togglable.component'
+import PropTypes from 'prop-types'
 
 const Blog = ({ newMessage }) => {
   const [blogs, setBlogs] = useState([])
@@ -28,6 +29,9 @@ const Blog = ({ newMessage }) => {
 }
 
 const Bloglist = ({ bloglist, newMessage }) => {
+  Bloglist.propTypes = {
+    bloglist: PropTypes.array
+  }
   const [blogs, setBlogs] = useState(bloglist.sort((a, b) => b.likes - a.likes))
   const [toggledBlogs, toggleBlogs] = useState(new Map())
   const showWhenVisible = (id) => {
@@ -35,13 +39,13 @@ const Bloglist = ({ bloglist, newMessage }) => {
   }
 
   const toggleDetails = (blog) => {
-    toggledBlogs.set(blog, !toggledBlogs.get(blog));
-    toggleBlogs(new Map(toggledBlogs));
+    toggledBlogs.set(blog, !toggledBlogs.get(blog))
+    toggleBlogs(new Map(toggledBlogs))
   }
 
   const like = async (likedBlog) => {
     try {
-      const blogLiked = await likeBlog(likedBlog.id, likedBlog.likes + 1);
+      const blogLiked = await likeBlog(likedBlog.id, likedBlog.likes + 1)
       if (blogLiked) {
         newMessage({ success: 'blog liked' })
         const unsortedBlogs = blogs.map(blog => blog.id === likedBlog.id ? { ...blog, likes: blog.likes + 1 } : blog)
@@ -54,7 +58,7 @@ const Bloglist = ({ bloglist, newMessage }) => {
 
   const blogDelete = async (blogId) => {
     try {
-      if (window.confirm("Do you really want delete this blog?")) { 
+      if (window.confirm('Do you really want delete this blog?')) {
         const token = JSON.parse(window.localStorage.getItem('loggedAppUser')).data.token
         const blogDeleted = await deleteBlog(blogId, token)
         if (blogDeleted) {

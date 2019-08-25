@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import Login from './components/Login.component'
 import Blog from './components/Blog.component'
 import Message from './components/messages'
@@ -34,4 +34,4 @@ const App = () => {
   )
 }
 
-export default App;
+export default App
