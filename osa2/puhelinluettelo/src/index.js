@@ -37,9 +37,11 @@ const App = () => {
                 setSuccessMessage('Listättiin ' + newPerson.name)
             })
         } else if (personExists && newPerson.number && newPerson.number.length > 0) {
+        if (window.confirm(`Edit ${personExists.name}`)) { 
             put(newPerson, personExists.id).then(asd =>
                 changeContactsState(persons.map(person => person.id !== personExists.id ? person : newPerson))
                 )
+            }
         } else {
             alert(`${newName} on jo luettelossa`)
         }
