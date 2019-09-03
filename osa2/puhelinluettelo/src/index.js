@@ -45,10 +45,12 @@ const App = () => {
         }
     }
     const removeContact = (person) => {
-        remove(person)
+        if (window.confirm(`Delete ${person.name}`)) { 
+            remove(person)
             .then(() => {
                 changeContactsState(persons.filter(e => e.id !== person.id))
             })
+        }
     }
 
     const nameHandler = (event) => setNewName(event.target.value)
